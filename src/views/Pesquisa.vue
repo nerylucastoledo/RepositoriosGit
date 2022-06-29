@@ -3,13 +3,16 @@
         <h1 class="title">Como podemos simplificar seu código hoje?</h1>
 
         <GitBuscar />
+
+        <GitProjects />
     </section>
 </template>
 
 <script>
 import GitBuscar from '@/components/GitBuscar.vue';
+import GitProjects from '@/components/GitProjects.vue';
 export default {
-    components: { GitBuscar }
+    components: { GitBuscar, GitProjects }
 }
 </script>
 

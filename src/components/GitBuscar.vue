@@ -16,7 +16,7 @@ export default {
 
     methods: {
         buscarProdutos() {
-            console.log('teste')
+            this.$router.push({ query: { q: `${this.pesquisar}`}})
         }
     }
 }
