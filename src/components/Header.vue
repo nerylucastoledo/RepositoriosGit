@@ -47,6 +47,10 @@ header {
     margin: 0 30px;
 }
 
+.navbar ul li:last-child {
+    margin-right: 0px;
+}
+
 .navbar ul li a {
     color: #E6E1E5;
     position: relative;

@@ -25,24 +25,31 @@ export default {
 
 @import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
 
-body {
-  background-color: #1C1B1F;
-}
-
 * {
+  box-sizing: border-box;
   padding: 0px;
   margin: 0px;
   font-family: 'Roboto';
   text-decoration: none;
   font-weight: 400;
-  list-style: none;
-  box-sizing: border-box;
+}
+
+body {
+  background-color: #1C1B1F;
+}
+
+body, ul, li, h1, h2, h3, p, a {
+  padding: 0px;
+  margin: 0px;
+  font-family: 'Roboto';
+  text-decoration: none;
+  font-weight: 400;
 }
 
 .container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0px;
+  padding: 0 20px;
   position: relative;
 }
 
