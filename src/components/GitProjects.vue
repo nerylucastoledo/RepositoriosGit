@@ -1,14 +1,11 @@
 <template>
     <main class="container">
-        <div v-if="cards">
+        <div v-if="cards.length">
             <div v-for="card in cards" :key="card.id">
-                <router-link
-                    :to="{
+                <router-link :to="{
                         name: 'detail',
-                        params: {name: card.owner.login, projeto: card.name}
-                    }"
-
-                >
+                        params: {nome: card.owner.login, projeto: card.name}}"
+                    >
                     <div class="card">
                         <img :src="card.owner.avatar_url" alt="Avatar"/>
 
@@ -22,6 +19,7 @@
                     </div>
                 </router-link>
             </div>
+            <Paginacao :total="total" :porPagina="porPagina"/>
         </div>
         <div v-else class="setas">
             <img src="../assets/setas.png" alt="Setas">
@@ -30,38 +28,50 @@
 </template>
 
 <script>
+import Paginacao from "./Paginacao.vue";
 
 export default {
+    components: { Paginacao },
 
     data() {
         return {
-            cards: []
+            cards: [],
+            total: 0,
+            porPagina: 12
         }
     },
-
     computed: {
         url() {
-            return this.$route.query.q
+            var query = this.$route.query.q
+            if (query === undefined || !query.length) {
+                this.cards = []
+            }
+
+            var page = this.$route.query.page
+            return `?q=${query}&page=${page}&per_page=${this.porPagina}`
         }
     },
-
     watch: {
         url() {
-            this.buscarRepositorio()
+            if (this.$route.query.q) {
+                this.buscarRepositorio()
+            }
         }
     },
-
     methods: {
         async buscarRepositorio() {
-            await fetch(`https://api.github.com/search/repositories?q=${this.url}`)
-            .then(req => req.json())
-            .then(res => this.cards = res.items)
+            await fetch(`https://api.github.com/search/repositories${this.url}`)
+                .then(req => req.json())
+                .then(res => {
+                this.cards = res.items
+                this.total = res.total_count
+                window.scrollTo({ top: 0, behavior: 'smooth' })
+            })
         }
     },
-
     created() {
-        document.title = 'Pesquisa'
-    }
+        document.title = "Pesquisa";
+    },
 }
 </script>
 
@@ -69,13 +79,13 @@ export default {
 
 .setas img {
     display: block;
-    margin: 0 auto;
+    margin: 100px auto 0;
 }
 
 .card {
     max-width: 950px;
     background-color: #49454F;
-    margin: 0 auto;
+    margin: 32px auto 0;
     padding: 25px 32px;
     display: flex;
     align-items: center;
@@ -83,10 +93,6 @@ export default {
     color: #E6E1E5;
     border-radius: 12px;
     margin-bottom: 32px;
-}
-
-.card h2 {
-    margin-bottom: 25px;
 }
 
 .card img {
@@ -100,6 +106,10 @@ export default {
     max-width: 740px;
     width: 100%;
     margin-right: 30px;
+}
+
+.name-description h2 {
+    margin-bottom: 25px;
 }
 
 .card span {

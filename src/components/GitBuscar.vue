@@ -1,6 +1,11 @@
 <template>
     <form action="" class="form-buscar">
-        <input v-model="pesquisar" type="text" id="pesquisa" placeholder="Fique a vontade para pesquisar da forma que preferir...">
+        <input 
+            v-model="pesquisar" 
+            type="text" 
+            id="pesquisa" 
+            placeholder="Fique a vontade para pesquisar da forma que preferir..."
+        >
         
         <input type="submit" class="icon-lupa" @click.prevent="buscarProdutos"/>
     </form>
@@ -28,7 +33,7 @@ export default {
     max-width: 950px;
     position: relative;
     display: block;
-    margin: 0 auto 100px;
+    margin: 0 auto;
 }
 
 #pesquisa {
