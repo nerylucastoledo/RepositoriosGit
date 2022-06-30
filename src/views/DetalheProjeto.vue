@@ -3,19 +3,16 @@
         <div class="background">
             <img src="../assets/logo2.png" alt="Logo"/>
         </div>
+        
         <div class="info-git">
             <img src="../assets/logo.png" alt="Logo">
-            <p>{{repositorio.full_name}}</p>
+            <p>GitRepo_Explorer</p>
         </div>
 
         <div class="detail" v-if="repositorio">
             <img :src="repositorio.owner.avatar_url" alt="Avatar Githhub">
 
-            <div>
-                <h1>{{repositorio.name}}</h1>
-
-                <p>{{repositorio.description}}</p>
-            </div> 
+            <Favoritar :repositorio="repositorio"/>
         </div>
 
         <div class="info-repositorio">
@@ -34,48 +31,61 @@
                 <h2>{{data(repositorio.updated_at)}}</h2>
             </div>
         </div> 
+
+        <Footer />
     </section>
 </template>
 
 <script>
+
+import Favoritar from '../components/Favoritar.vue'
+import Footer from '@/components/Footer.vue';
+
 export default {
-    
+
+    components: {
+    Favoritar,
+    Footer
+},
+
     data() {
         return {
             repositorio: "",
-        }
+        };
     },
-
     methods: {
         async buscarRepositorio(nome, repositorio) {
             await fetch(`https://api.github.com/repos/${nome}/${repositorio}`)
-            .then(req => req.json())
-            .then(res => this.repositorio = res)
+                .then(req => req.json())
+                .then(res => this.repositorio = res);
         },
 
         data(data) {
-            if ( data ) {
-                var parte = data.substring(0, 10).split('-').reverse().join('/')
-                return parte
+            if (data) {
+                var parte = data.substring(0, 10).split("-").reverse().join("/");
+                return parte;
             }
         }
     },
-
     created() {
-        const { nome, projeto } = this.$route.params
-        this.buscarRepositorio(nome, projeto)
-    }
+        const { nome, projeto } = this.$route.params;
+        this.buscarRepositorio(nome, projeto);
+    },
 }
 </script>
 
 <style>
 
 .info-git, 
-.detail, 
 .info-repositorio, 
-.info-repositorio div {
+.info-repositorio div{
     display: flex;
     flex-wrap: wrap;
+    align-items: center;
+}
+
+.detail {
+    display: flex;
     align-items: center;
 }
 
@@ -108,7 +118,6 @@ export default {
     font-size: 36px;
     font-weight: 500;
     line-height: 24px;
-    margin-bottom: 20px;
 }
 
 .detail p {
@@ -131,7 +140,7 @@ export default {
 }
 
 .info-repositorio div {
-    margin: 0 10px;
+    margin: 0;
 }
 
 .info-repositorio img {
@@ -145,5 +154,7 @@ export default {
     transform: translate(-10%, -50%);
     filter: brightness(20%);
 }
+
+
 
 </style>
