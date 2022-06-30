@@ -21,7 +21,12 @@ export default {
 
     methods: {
         buscarProdutos() {
-            this.$router.push({ query: { q: `${this.pesquisar}`}})
+            this.$router.push({ 
+                query: { 
+                    q: `${this.pesquisar}`, 
+                    page: 1
+                }
+            })
         }
     }
 }

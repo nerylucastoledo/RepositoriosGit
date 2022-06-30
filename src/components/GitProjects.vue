@@ -43,11 +43,12 @@ export default {
     computed: {
         url() {
             var query = this.$route.query.q
+            var page = this.$route.query.page
+
             if (query === undefined || !query.length) {
                 this.cards = []
             }
 
-            var page = this.$route.query.page
             return `?q=${query}&page=${page}&per_page=${this.porPagina}`
         }
     },
@@ -61,8 +62,8 @@ export default {
     methods: {
         async buscarRepositorio() {
             await fetch(`https://api.github.com/search/repositories${this.url}`)
-                .then(req => req.json())
-                .then(res => {
+            .then(req => req.json())
+            .then(res => {
                 this.cards = res.items
                 this.total = res.total_count
                 window.scrollTo({ top: 0, behavior: 'smooth' })
