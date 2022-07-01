@@ -1,19 +1,36 @@
-# git-repo
+# GitRepo - Athon
 
-## Project setup
-```
-npm install
+
+## Website para buscar repositórios utlizando API do github
+
+## Linguagens e frameworks utilizados
+
+- Vue.js (Versão 2)
+- JavaScript
+- HTML5
+- CSS3
+
+## Como rodar a aplicação na sua máquina :rocket:
+No terminal clone o projeto:
+
+```sh
+  git clone https://github.com/nerylucastoledo/athon
 ```
 
-### Compiles and hot-reloads for development
-```
-npm run serve
+Com o projeto na sua maquina, rode o seguinte
+
+```sh
+  npm install
 ```
 
-### Compiles and minifies for production
-```
-npm run build
+Depois de instaladas as dependências, rode
+
+```sh
+  npm run serve
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+Acesse
+
+```sh
+  http://localhost:8080/
+```
