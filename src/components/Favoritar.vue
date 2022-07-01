@@ -14,7 +14,7 @@
             </div>
         </div>
 
-        <p>{{repositorio.description}}</p>
+        <p class="descricao">{{repositorio.description}}</p>
     </div> 
 </template>
 
@@ -48,6 +48,7 @@ export default {
     display: flex;
     align-items: center;
     margin-bottom: 20px;
+    position: relative;
 }
 
 .name-favoritar img {
@@ -70,6 +71,33 @@ export default {
 
 .active {
     display: initial;
+}
+
+@media (max-width: 700px) {
+    .name-favoritar {
+        display: block;
+    }
+
+    .name-favoritar img {
+        margin-left: 0px;
+    }
+
+    .name-favoritar h1 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .favoritar {
+        position: absolute;
+        display: block;
+        text-align: center;
+        top: -80px;
+        right: 0;
+    }
+
+    .descricao {
+        text-align: center;
+    }
 }
 
 </style>

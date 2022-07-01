@@ -4,6 +4,14 @@
     </footer>
 </template>
 
+<style scoped>
+
+.container {
+    max-width: 1500px;
+}
+
+</style>
+
 <style>
 
 footer {

@@ -10,6 +10,7 @@
             
             <Paginacao :total="total" :porPagina="porPagina"/>
         </div>
+
         <div v-else class="setas">
             <img src="../assets/setas.png" alt="Setas">
         </div>
@@ -17,12 +18,14 @@
 </template>
 
 <script>
+
 import Paginacao from "./Paginacao.vue";
 import Cards from "./Cards.vue";
 
 export default {
     components: { 
-        Paginacao, Cards
+        Paginacao, 
+        Cards
     },
 
     data() {
@@ -77,6 +80,12 @@ export default {
 .setas img {
     display: block;
     margin: 100px auto 0;
+}
+
+@media (max-width: 450px) {
+    .setas {
+        margin-bottom: 30px;
+    }
 }
 
 </style>

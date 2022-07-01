@@ -4,13 +4,17 @@
         params: {nome: repositorio.owner.login, projeto: repositorio.name}}"
         >
         <div class="card">
-            <img :src="repositorio.owner.avatar_url" alt="Avatar"/>
+            <img id="avatar" :src="repositorio.owner.avatar_url" alt="Avatar"/>
 
             <div class="name-description">
-                <Favoritar :repositorio="repositorio" :active="active" :index="index"/>
+                <Favoritar 
+                    :repositorio="repositorio" 
+                    :active="active" 
+                    :index="index"
+                />
             </div>
 
-            <span>></span>
+            <img id="seta-acessar" src="../assets/seta-acessar.png" alt="Setar direita">
         </div>
     </router-link>
 </template>
@@ -20,7 +24,9 @@
 import Favoritar from './Favoritar.vue'
 
 export default {
-    components: { Favoritar },
+    components: { 
+        Favoritar 
+    },
 
     props: {
         repositorio: Object,
@@ -50,10 +56,6 @@ export default {
     border: 1px solid #938F99;
 }
 
-.card span {
-    font-size: 28px;
-}
-
 .card img {
     max-width: 70px;
     max-height: 72px;
@@ -69,6 +71,27 @@ export default {
 
 .name-description h2 {
     margin-bottom: 25px;
+}
+
+@media (max-width: 700px) {
+    .card {
+        display: block;
+    }
+
+    #avatar {
+        display: block;
+        margin: 0 auto 20px;
+    }
+
+    .name-description {
+        margin-left: 0px;
+        max-height: unset;
+        max-width: 100%;
+    }
+
+    #seta-acessar{
+        display: none;
+    }
 }
 
 </style>

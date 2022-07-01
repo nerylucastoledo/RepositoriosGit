@@ -6,12 +6,12 @@
             </div>
             
             <div class="info-git">
-                <img src="../assets/logo.png" alt="Logo">
+                <img src="../assets/gitexplorer.png" alt="Logo">
                 <p>GitRepo_Explorer</p>
             </div>
 
             <div class="detail" v-if="repositorio">
-                <img :src="repositorio.owner.avatar_url" alt="Avatar Githhub">
+                <img id="avatar-detail" :src="repositorio.owner.avatar_url" alt="Avatar Githhub">
                 
                 <Favoritar :repositorio="repositorio" :index="0"/>
             </div>
@@ -39,6 +39,7 @@
 <script>
 
 import Favoritar from '../components/Favoritar.vue'
+
 export default {
 
     components: {
@@ -48,13 +49,14 @@ export default {
     data() {
         return {
             repositorio: "",
-        };
+        }
     },
+
     methods: {
         async buscarRepositorio(nome, repositorio) {
             await fetch(`https://api.github.com/repos/${nome}/${repositorio}`)
-                .then(req => req.json())
-                .then(res => this.repositorio = res)
+            .then(req => req.json())
+            .then(res => this.repositorio = res)
         },
 
         data(data) {
@@ -69,9 +71,9 @@ export default {
             }
         }
     },
+
     created() {
         const { nome, projeto } = this.$route.params
-
         this.buscarRepositorio(nome, projeto)
     },
 }
@@ -102,17 +104,20 @@ export default {
 }
 
 .info-git img {
-    width: 21px;
-    height: 21px;
+    width: 24px;
+    height: 24px;
     margin-right: 15px;
+    background-color: #fff;
+    padding: 2px;
+    border-radius: 50%;
+
 }
 
-.info-git p, .detail, .info-repositorio h2 {
+.detail, .info-repositorio h2 {
     color: #E6E1E5;
 }
 
 .info-git p {
-    line-height: 24px;
     font-weight: 100;
 }
 
@@ -124,11 +129,6 @@ export default {
 .detail h1 {
     font-size: 36px;
     font-weight: 500;
-    line-height: 24px;
-}
-
-.detail p {
-    line-height: 20px;
 }
 
 .detail img {
@@ -162,6 +162,28 @@ export default {
     filter: brightness(20%);
 }
 
+@media (max-width: 700px) {
+    .detail {
+        display: block;
+        margin-bottom: 30px;
+    }
 
+    #avatar-detail {
+        max-width: 100px;
+        max-height: 102px;
+        margin-right: 3px;
+        display: block;
+        margin: 0 auto 30px;
+    }
+
+    .info-repositorio {
+        display: block;
+    }
+
+    .info-repositorio div {
+        justify-content: center;
+        margin-bottom: 30px;
+    }
+}
 
 </style>

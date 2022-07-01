@@ -1,5 +1,5 @@
 <template>
-    <form action="" class="form-buscar">
+    <form class="form-buscar">
         <input 
             v-model="pesquisar" 
             type="text" 
@@ -12,7 +12,9 @@
 </template>
 
 <script>
+
 export default {
+
     data() {
         return {
             pesquisar: ""

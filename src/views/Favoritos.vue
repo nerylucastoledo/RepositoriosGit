@@ -1,7 +1,8 @@
 <template>
     <main class="container">
         <div class="info-git info-git-favoritos">
-            <img src="../assets/logo.png" alt="Logo">
+            <img src="../assets/gitexplorer.png" alt="Logo">
+            
             <p>GitRepo_Explorer</p>
         </div>
 
@@ -64,6 +65,10 @@ export default {
     max-width: 950px;
     margin-left: auto;
     margin-right: auto;
+}
+
+.info-git p {
+    color: #5b595d;
 }
 
 .not-found {

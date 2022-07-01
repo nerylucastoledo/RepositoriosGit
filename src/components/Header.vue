@@ -1,6 +1,6 @@
 <template>
     <header>
-        <nav class="container navbar">
+        <nav class="navbar">
             <router-link to="/" id="logo">
                 <img src="../assets/logo.png" alt="Logo">
             </router-link>
@@ -35,20 +35,21 @@ header {
 .navbar {
     display: flex;
     align-items: center;
+    max-width: 1400px;
+    margin: 0 auto;
+    text-align: center;
 }
 
 .navbar ul {
     width: 100%;
-    text-align: center;
 }
 
 .navbar ul li {
     display: inline-block;
-    margin: 0 30px;
 }
 
-.navbar ul li:last-child {
-    margin-right: 0px;
+.navbar ul li:first-child {
+    margin-right: 60px;
 }
 
 .navbar ul li a {
