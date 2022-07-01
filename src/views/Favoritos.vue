@@ -16,8 +16,6 @@
                     :index="index"
                 />
             </div>
-
-            <Paginacao :total="total" :porPagina="porPagina"/>
         </div>
 
         <div v-else class="not-found">
@@ -29,24 +27,17 @@
 <script>
 
 import Cards from '../components/Cards.vue'
-import Paginacao from '../components/Paginacao.vue'
 
 export default {
 
     components: {
         Cards,
-        Paginacao,
-    },
-
-    data() {
-        return {
-            total: 0,
-            porPagina: 12
-        }
     },
 
     computed: {
         favoritos() {
+            const favoritos = this.$store.state.favoritos
+            this.total = favoritos
             return this.$store.state.favoritos
         }
     },

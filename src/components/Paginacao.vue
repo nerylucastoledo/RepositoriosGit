@@ -42,6 +42,7 @@ export default {
             pagesArray.splice(range, total)
             return pagesArray
         },
+        
         paginasTotal() {
             const total = this.total / this.porPagina
             return total !== Infinity ? Math.ceil(total) : 0
