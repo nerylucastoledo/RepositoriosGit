@@ -160,12 +160,17 @@ export default {
     right: 0;
     transform: translate(-10%, -50%);
     filter: brightness(20%);
+    z-index: -1;
 }
 
 @media (max-width: 700px) {
     .detail {
         display: block;
         margin-bottom: 30px;
+    }
+
+    .detail h1 {
+        font-size: 24px;
     }
 
     #avatar-detail {
@@ -184,6 +189,11 @@ export default {
         justify-content: center;
         margin-bottom: 30px;
     }
+
+    .background {
+        display: none;
+    }
+
 }
 
 </style>
