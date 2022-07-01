@@ -9,10 +9,13 @@
 </template>
 
 <script>
-import GitBuscar from '@/components/GitBuscar.vue';
-import GitProjects from '@/components/GitProjects.vue';
+import GitBuscar from '@/components/GitBuscar.vue'
+import GitProjects from '@/components/GitProjects.vue'
 export default {
-    components: { GitBuscar, GitProjects }
+    components: { 
+        GitBuscar, 
+        GitProjects 
+    }
 }
 </script>
 

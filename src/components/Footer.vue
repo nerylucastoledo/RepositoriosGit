@@ -6,6 +6,10 @@
 
 <style>
 
+footer {
+    width: 100%;
+}
+
 footer p {
     font-weight: 400;
     color: #fff;

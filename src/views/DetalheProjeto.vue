@@ -1,52 +1,49 @@
 <template>
     <section class="container">
-        <div class="background">
-            <img src="../assets/logo2.png" alt="Logo"/>
-        </div>
-        
-        <div class="info-git">
-            <img src="../assets/logo.png" alt="Logo">
-            <p>GitRepo_Explorer</p>
-        </div>
-
-        <div class="detail" v-if="repositorio">
-            <img :src="repositorio.owner.avatar_url" alt="Avatar Githhub">
-
-            <Favoritar :repositorio="repositorio"/>
-        </div>
-
-        <div class="info-repositorio">
-            <div>
-                <img src="../assets/estrela.png" alt="Estrela">
-                <h2>{{repositorio.stargazers_count}}</h2>
+        <div class="detail-project">
+            <div class="background">
+                <img src="../assets/logo2.png" alt="Logo"/>
+            </div>
+            
+            <div class="info-git">
+                <img src="../assets/logo.png" alt="Logo">
+                <p>GitRepo_Explorer</p>
             </div>
 
-            <div>
-                <img src="../assets/olho.png" alt="Olho">
-                <h2>{{repositorio.watchers}}</h2>
+            <div class="detail" v-if="repositorio">
+                <img :src="repositorio.owner.avatar_url" alt="Avatar Githhub">
+                
+                <Favoritar :repositorio="repositorio" :index="0"/>
             </div>
 
-            <div>
-                <img src="../assets/calendario.png" alt="Calendario">
-                <h2>{{data(repositorio.updated_at)}}</h2>
-            </div>
-        </div> 
+            <div class="info-repositorio">
+                <div>
+                    <img src="../assets/estrela.png" alt="Estrela">
+                    <h2>{{repositorio.stargazers_count}}</h2>
+                </div>
 
-        <Footer />
+                <div>
+                    <img src="../assets/olho.png" alt="Olho">
+                    <h2>{{repositorio.watchers}}</h2>
+                </div>
+
+                <div>
+                    <img src="../assets/calendario.png" alt="Calendario">
+                    <h2>{{data(repositorio.updated_at)}}</h2>
+                </div>
+            </div> 
+        </div>
     </section>
 </template>
 
 <script>
 
 import Favoritar from '../components/Favoritar.vue'
-import Footer from '@/components/Footer.vue';
-
 export default {
 
     components: {
-    Favoritar,
-    Footer
-},
+        Favoritar,
+    },
 
     data() {
         return {
@@ -57,24 +54,34 @@ export default {
         async buscarRepositorio(nome, repositorio) {
             await fetch(`https://api.github.com/repos/${nome}/${repositorio}`)
                 .then(req => req.json())
-                .then(res => this.repositorio = res);
+                .then(res => this.repositorio = res)
         },
 
         data(data) {
             if (data) {
-                var parte = data.substring(0, 10).split("-").reverse().join("/");
-                return parte;
+                var dataFormatada = data
+                    .substring(0, 10)
+                    .split("-")
+                    .reverse()
+                    .join("/")
+
+                return dataFormatada
             }
         }
     },
     created() {
-        const { nome, projeto } = this.$route.params;
-        this.buscarRepositorio(nome, projeto);
+        const { nome, projeto } = this.$route.params
+
+        this.buscarRepositorio(nome, projeto)
     },
 }
 </script>
 
 <style>
+
+.detail-project {
+    position: relative;
+}
 
 .info-git, 
 .info-repositorio, 

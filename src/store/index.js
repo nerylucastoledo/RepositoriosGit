@@ -11,7 +11,10 @@ export default new Vuex.Store({
   },
   mutations: {
     ADD_FAVORITOS(state, data) {
-      state.favoritos.push(data)
+      const existe = state.favoritos.find(element => element.id === data.id)
+      if (!existe) {
+        state.favoritos.push(data)
+      }
     },
 
     REMOVE_FAVORITO(state, id) {

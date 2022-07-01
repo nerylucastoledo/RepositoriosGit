@@ -1,15 +1,13 @@
 <template>
     <router-link :to="{
         name: 'detail',
-        params: {nome: nome, projeto: projeto}}"
+        params: {nome: repositorio.owner.login, projeto: repositorio.name}}"
         >
         <div class="card">
-            <img :src="avatar" alt="Avatar"/>
+            <img :src="repositorio.owner.avatar_url" alt="Avatar"/>
 
             <div class="name-description">
-                <h2>{{fullName}}</h2>
-
-                <p>{{description}}</p>
+                <Favoritar :repositorio="repositorio" :active="active" :index="index"/>
             </div>
 
             <span>></span>
@@ -18,10 +16,20 @@
 </template>
 
 <script>
-export default {
-    
-    props: ["nome", "projeto", "fullName", "avatar", "description"]
 
+import Favoritar from './Favoritar.vue'
+
+export default {
+    components: { Favoritar },
+
+    props: {
+        repositorio: Object,
+        active: {
+            default: "",
+            type: String
+        },
+        index: Number
+    }
 }
 </script>
 
@@ -39,6 +47,7 @@ export default {
     border-radius: 12px;
     margin-bottom: 32px;
     z-index: 2;
+    border: 1px solid #938F99;
 }
 
 .card span {

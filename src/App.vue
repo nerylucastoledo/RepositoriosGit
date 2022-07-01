@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-
     <Header />
 
     <main id="main">
@@ -8,22 +7,36 @@
           <router-view />
         </transition>
     </main>
+
+    <Footer />
   </div>
 </template>
 
 <script>
 import Header from './components/Header.vue'
+import Footer from './components/Footer.vue'
 
 export default {
   components: {
-    Header
-  }
+    Header,
+    Footer
+}
 }
 </script>
 
 <style>
 
 @import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+
+#app {
+  display: flex;
+  min-height: 90vh;
+  flex-direction: column;
+}
+
+#main {
+  flex: 1;
+}
 
 * {
   box-sizing: border-box;

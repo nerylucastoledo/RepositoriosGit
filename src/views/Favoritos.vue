@@ -1,6 +1,5 @@
 <template>
     <main class="container">
-
         <div class="info-git info-git-favoritos">
             <img src="../assets/logo.png" alt="Logo">
             <p>GitRepo_Explorer</p>
@@ -9,20 +8,20 @@
         <h1 class="title title-favoritos">Favoritos</h1>
 
         <div v-if="favoritos.length">
-            <div v-for="favorito in favoritos" :key="favorito.id">
+            <div v-for="(favorito, index) in favoritos" :key="favorito.id">
                 <Cards 
-                    :nome="favorito.owner.login" 
-                    :projeto="favorito.name" 
-                    :fullName="favorito.full_name" 
-                    :avatar="favorito.owner.avatar_url"
-                    :description="favorito.description"
-                    :repositorio="favorito"
+                    :repositorio="favorito" 
+                    :active="'active'" 
+                    :index="index"
                 />
             </div>
+
             <Paginacao :total="total" :porPagina="porPagina"/>
         </div>
-        
-        <Footer />
+
+        <div v-else class="not-found">
+            <h1>Você ainda não tem favoritos :(</h1>
+        </div>
     </main>
 </template>
 
@@ -30,34 +29,26 @@
 
 import Cards from '../components/Cards.vue'
 import Paginacao from '../components/Paginacao.vue'
-import Footer from '@/components/Footer.vue'
 
 export default {
 
     components: {
-    Cards,
-    Paginacao,
-    Footer
-},
+        Cards,
+        Paginacao,
+    },
 
     data() {
         return {
-            favoritos: [],
             total: 0,
             porPagina: 12
         }
     },
-    
-    methods: {
-        pegarFavoritos() {
-            this.favoritos = this.$store.state.favoritos
-            this.total = this.favoritos.length
+
+    computed: {
+        favoritos() {
+            return this.$store.state.favoritos
         }
     },
-
-    created() {
-        this.pegarFavoritos()
-    }
 }
 </script>
 
@@ -75,5 +66,10 @@ export default {
     margin-right: auto;
 }
 
+.not-found {
+    text-align: center;
+    margin-top: 60px;
+    color: #E6E1E5;
+}
 
 </style> 

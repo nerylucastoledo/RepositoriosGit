@@ -3,10 +3,14 @@
         <div class="name-favoritar">
             <h1>{{repositorio.name}}</h1>
 
-            <div class="favoritar" @click="favoritar">
-                <img id="favorito" src="../assets/coracao.svg" alt="Coracao"/>
+            <div class="favoritar" @click.prevent="favoritar">
+                <img 
+                    id="favorito" 
+                    src="../assets/coracao.svg" 
+                    alt="Coracao"
+                />
 
-                <img class="preenchido" src="../assets/coracao_favorito.png" alt="Coracao Preenchido">
+                <img :class="['preenchido', active]" src="../assets/coracao_favorito.png" alt="Coracao Preenchido">
             </div>
         </div>
 
@@ -17,18 +21,22 @@
 <script>
 export default {
     
-    props: ["repositorio"],
+    props: ["repositorio", "active", "index"],
 
     methods: {
         favoritar() {
-            const favorito = document.querySelector(".preenchido");
-            if (favorito.classList.contains("active")) {
-                this.$store.dispatch("removeFavorito", this.repositorio.id);
-                favorito.classList.remove("active");
-                return;
+            const favorito = document.querySelectorAll(".preenchido")
+            const index = this.index
+            const jaFavoritado = favorito[index].classList.contains("active")
+
+            if (jaFavoritado) {
+                this.$store.dispatch("removeFavorito", this.repositorio.id)
+                favorito[index].classList.remove("active")
+                return
             }
-            this.$store.dispatch("addFavoritos", this.repositorio);
-            favorito.classList.add("active");
+
+            this.$store.dispatch("addFavoritos", this.repositorio)
+            favorito[index].classList.add("active")
         },
     }
 }

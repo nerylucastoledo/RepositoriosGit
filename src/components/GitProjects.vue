@@ -1,32 +1,29 @@
 <template>
     <main class="container">
         <div v-if="cards.length">
-            <div v-for="card in cards" :key="card.id">
+            <div v-for="(card, index) in cards" :key="card.id">
                 <Cards 
-                    :nome="card.owner.login" 
-                    :projeto="card.name" 
-                    :fullName="card.full_name" 
-                    :avatar="card.owner.avatar_url"
-                    :description="card.description"
+                    :repositorio="card" 
+                    :index="index" 
                 />
             </div>
+            
             <Paginacao :total="total" :porPagina="porPagina"/>
         </div>
         <div v-else class="setas">
             <img src="../assets/setas.png" alt="Setas">
         </div>
-
-        <Footer />
     </main>
 </template>
 
 <script>
 import Paginacao from "./Paginacao.vue";
 import Cards from "./Cards.vue";
-import Footer from "./Footer.vue";
 
 export default {
-    components: { Paginacao, Cards, Footer },
+    components: { 
+        Paginacao, Cards
+    },
 
     data() {
         return {
@@ -35,6 +32,7 @@ export default {
             porPagina: 12
         }
     },
+
     computed: {
         url() {
             var query = this.$route.query.q
@@ -47,6 +45,7 @@ export default {
             return `?q=${query}&page=${page}&per_page=${this.porPagina}`
         }
     },
+
     watch: {
         url() {
             if (this.$route.query.q) {
@@ -54,6 +53,7 @@ export default {
             }
         }
     },
+
     methods: {
         async buscarRepositorio() {
             await fetch(`https://api.github.com/search/repositories${this.url}`)
@@ -64,11 +64,8 @@ export default {
                 window.scrollTo({ top: 0, behavior: 'smooth' })
             })
         },
-
-        favoritar() {
-            console.log('favoritar')
-        }
     },
+
     created() {
         document.title = "Pesquisa";
     },
